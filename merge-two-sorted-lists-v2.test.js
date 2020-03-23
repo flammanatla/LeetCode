@@ -1,5 +1,6 @@
 var assert = require("assert");
-var mergeLists = require("./merge-two-sorted-lists");
+var mergeTwoSortedLists = require("./merge-two-sorted-lists-v2");
+var utils = require("./utils");
 
 var tests = [
     { input1: [1,2,4], input2: [1,3,4], result: [1,1,2,3,4,4] },
@@ -7,38 +8,10 @@ var tests = [
     { input1: [3], input2:[], result: [3] },
     { input1: [], input2:[], result: [] },
     { input1: [50], input2:[52,53,54], result: [50,52,53,54] },
-    { input1: [60,61,62], input2:[63], result: [60,63,61,62] },
-    { input1: [2], input2:[1], result: [2,1] }
+    { input1: [60,61,62], input2:[63], result: [60,61,62,63] },
+    { input1: [71,72], input2:[70,73], result: [70,71,72,73] }
+
 ];
-
-function ListNode(val) {
-    this.val = val;
-    this.next = null;
-}
-
-function arrayToLinkedList(array) {
-    // return array.reduce( function(prev, curr) {
-    //     var node = new ListNode(curr);
-    //     if ( prev !== null ) {
-    //         prev.next = node;  
-    //     }
-    //     return node;
-    // }, null); 
-    var head = null;
-    var prev = null;
-    array.forEach( function(element) {
-        var node = new ListNode(element);   // create node for each element of array
-        if ( head === null ) {              // if there is no head yet, initialise it with node and immediately make it prev
-            head = node;
-            prev = head;
-        }
-        else {
-            prev.next = node;               // prev links with created node 
-            prev = node;                    
-        }
-    });
-    return head;
-}
 
 function checkListsEquality(l1, l2) { 
     if (l1 === null && l2 === null) {
@@ -78,11 +51,10 @@ function checkListsEquality(l1, l2) {
 console.log("starting tests");
 
 tests.map(function (test) {
-    var mergedList = mergeLists(arrayToLinkedList(test.input1), arrayToLinkedList(test.input2));
-    //console.log(mergedList.val); // mergedList.next.val, mergedList.next.next.val);
-    var resultList = arrayToLinkedList(test.result);
-    //console.log(resultList.val, resultList.next.val);
-
+    var mergedList = mergeTwoSortedLists(utils.arrayToLinkedList(test.input1), utils.arrayToLinkedList(test.input2));
+    //console.log(mergedList.val);//, mergedList.next.val); // mergedList.next.next.val);
+    var resultList = utils.arrayToLinkedList(test.result);
+    //console.log(resultList.val);//, resultList.next.val);
 
     assert(
         checkListsEquality(mergedList, resultList),
