@@ -1,3 +1,14 @@
+function runTest(title, test) {
+    try {
+        test();
+    } catch (error) {
+        console.log(`FAIL: ${title} \n ${error.stack}`);
+        return;
+    }
+
+    console.log("PASS:", title);
+}
+
 function ListNode(val) {
     this.val = val;
     this.next = null;
@@ -6,6 +17,7 @@ function ListNode(val) {
 function arrayToLinkedList(array) {
     var head = null;
     var prev = null;
+    
     array.forEach( function(element) {
         var node = new ListNode(element);   // create node for each element of array
         if ( head === null ) {              // if there is no head yet, initialise it with node and immediately make it prev
@@ -21,5 +33,6 @@ function arrayToLinkedList(array) {
 }
 
 module.exports = {
-    arrayToLinkedList: arrayToLinkedList
+    arrayToLinkedList: arrayToLinkedList,
+    runTest: runTest
 };

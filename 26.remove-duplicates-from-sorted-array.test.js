@@ -1,5 +1,5 @@
 var assert = require("assert");
-var removeDuplicatesFromSortedArray = require("./remove-duplicates-from-sorted-array");
+var removeDuplicatesFromSortedArray = require("./26.remove-duplicates-from-sorted-array");
 
 var tests = [
     { input: [1,1,2,4,4]},
