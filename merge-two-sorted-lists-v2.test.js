@@ -2,18 +2,14 @@ const assert = require("assert");
 const mergeTwoSortedLists = require("./merge-two-sorted-lists-v2");
 const utils = require("./utils");
 
-// Combine styled and normal strings
-//log(chalk.blue('Hello') + ' World' + chalk.red('!'));
-
 const tests = [
     { input1: [1,2,4], input2: [1,3,4], result: [1,1,2,3,4,4] },
     { input1: [], input2:[2], result: [2] },
-    { input1: [3], input2:[], result: [2] },
+    { input1: [3], input2:[], result: [3] },
     { input1: [], input2:[], result: [] },
     { input1: [50], input2:[52,53,54], result: [50,52,53,54] },
     { input1: [60,61,62], input2:[63], result: [60,61,62,63] },
     { input1: [71,72], input2:[70,73], result: [70,71,72,73] }
-
 ];
 
 function checkListsEquality(l1, l2) { 
@@ -52,7 +48,7 @@ function checkListsEquality(l1, l2) {
 }
 
 tests.map((test, index) => {
-    utils.runTest(`test# ${index}`, () => {
+    utils.runTest(`test# ${index}`, tests.length, () => {
         const mergedList = mergeTwoSortedLists(utils.arrayToLinkedList(test.input1), utils.arrayToLinkedList(test.input2));
         const resultList = utils.arrayToLinkedList(test.result);
 

@@ -1,7 +1,8 @@
-var assert = require("assert");
-var removeDuplicatesFromSortedArray = require("./26.remove-duplicates-from-sorted-array");
+const assert = require("assert");
+const removeDuplicatesFromSortedArray = require("./26.remove-duplicates-from-sorted-array");
+const utils = require("./utils");
 
-var tests = [
+let tests = [
     { input: [1,1,2,4,4]},
     { input: []},
     { input: [0,0,1,1,1,2,2,3,3,4] },
@@ -24,7 +25,7 @@ function checkArraysEquality(array1, array2) {
         return false;
     }
 
-    var result = true;
+    let result = true;
     array1.forEach(function (value, index) {
         if (value !== array2[index]) {
             result = false;
@@ -34,23 +35,21 @@ function checkArraysEquality(array1, array2) {
     return result;    
 }
 
-console.log("starting tests");
 
-tests.map(function (test) {
-    var actualArray = [...test.input];
-    var actualLength = removeDuplicatesFromSortedArray(actualArray);
+tests.map((test, index) => {
+    utils.runTest(`test# ${index}`, tests.length, () => {
+        const actualArray = [...test.input];
+        const actualLength = removeDuplicatesFromSortedArray(actualArray);
 
-    assert(
-        checkArraysEquality(actualArray, test.expectedArray),
-        "array equality check failed: actual result: [" + actualArray + 
-        "], expected result: [" + test.expectedArray + "]"
-    );
-    assert(
-        actualLength === test.expectedLength,
-        "length check failed with actual result:" + actualLength + 
-        ", expected result: " + test.expectedLength
-    );
-    console.log("test PASSED with input: [" + test.input + "]")
+        assert(
+            checkArraysEquality(actualArray, test.expectedArray),
+            "array equality check failed: actual result: [" + actualArray + 
+            "], expected result: [" + test.expectedArray + "]"
+        );
+        assert(
+            actualLength === test.expectedLength,
+            "length check failed with actual result:" + actualLength + 
+            ", expected result: " + test.expectedLength
+        );
+    });
 });
-
-console.log("tests finished successfully");

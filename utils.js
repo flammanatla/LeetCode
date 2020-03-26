@@ -1,15 +1,32 @@
 const chalk = require('chalk');
 const log = console.log;
 
-function runTest(title, test) {
+let i = 0;
+let allTestsPassed = true;
+function runTest(title, numberOfTests, test) {
+    if (i === 0) {
+        log("======== tests started ========");
+    }
+
+    let testError;
     try {
         test();
     } catch (error) {
-        log(chalk.bold.red(`FAIL:`) + `${title} \n ${error.stack}`);
-        return;
-    }
+        testError = error;
+    };
 
-    log(chalk.green("PASS:"), title);
+    if (testError) {
+        log(chalk.bold.red("FAIL: ") + `${title} \n ${testError.stack}`);
+        allTestsPassed = false;
+    } else {
+        log(chalk.green("PASS:"), title);
+    }
+    
+    if (i === numberOfTests - 1) {
+        const colouredResult = allTestsPassed ? chalk.bold.green("successfully") : chalk.bold.red("unsuccessfully");
+        log("ALL tests finished " + colouredResult);
+    }
+    i++;
 }
 
 function ListNode(val) {

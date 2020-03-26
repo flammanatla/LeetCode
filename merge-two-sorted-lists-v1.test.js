@@ -46,18 +46,14 @@ function checkListsEquality(l1, l2) {
     return true; 
 }
 
-console.log("starting tests");
+tests.map((test, index) => {
+    utils.runTest(`test# ${index}`, tests.length, () => {
+        const mergedList = mergeLists(utils.arrayToLinkedList(test.input1), utils.arrayToLinkedList(test.input2));
+        const resultList = utils.arrayToLinkedList(test.result);
 
-tests.map(function (test) {
-    var mergedList = mergeLists(utils.arrayToLinkedList(test.input1), utils.arrayToLinkedList(test.input2));
-    //console.log(mergedList.val); // mergedList.next.val, mergedList.next.next.val);
-    var resultList = utils.arrayToLinkedList(test.result);
-
-    assert(
-        checkListsEquality(mergedList, resultList),
-        "test failed with input: " + test.input1 + " and " + test.input2
-    );
-    console.log("test PASSED with input: " + test.input1 + " and " + test.input2)
+        assert(
+            checkListsEquality(mergedList, resultList),
+            "with input: " + test.input1 + " and " + test.input2
+        );
+    });
 });
-
-console.log("tests finished successfully");
