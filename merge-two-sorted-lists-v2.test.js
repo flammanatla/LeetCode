@@ -1,11 +1,14 @@
-var assert = require("assert");
-var mergeTwoSortedLists = require("./merge-two-sorted-lists-v2");
-var utils = require("./utils");
+const assert = require("assert");
+const mergeTwoSortedLists = require("./merge-two-sorted-lists-v2");
+const utils = require("./utils");
 
-var tests = [
+// Combine styled and normal strings
+//log(chalk.blue('Hello') + ' World' + chalk.red('!'));
+
+const tests = [
     { input1: [1,2,4], input2: [1,3,4], result: [1,1,2,3,4,4] },
     { input1: [], input2:[2], result: [2] },
-    { input1: [3], input2:[], result: [3] },
+    { input1: [3], input2:[], result: [2] },
     { input1: [], input2:[], result: [] },
     { input1: [50], input2:[52,53,54], result: [50,52,53,54] },
     { input1: [60,61,62], input2:[63], result: [60,61,62,63] },
@@ -31,8 +34,8 @@ function checkListsEquality(l1, l2) {
         }
     }
 
-    var curr1 = l1;
-    var curr2 = l2; 
+    let curr1 = l1;
+    let curr2 = l2; 
     while (curr1 != null) {
         if ((curr1.next !== null && curr2.next === null) ||
             (curr1.next === null && curr2.next !== null)) { // if one of lists is shorter 
@@ -48,19 +51,14 @@ function checkListsEquality(l1, l2) {
     return true; 
 }
 
-console.log("starting tests");
+tests.map((test, index) => {
+    utils.runTest(`test# ${index}`, () => {
+        const mergedList = mergeTwoSortedLists(utils.arrayToLinkedList(test.input1), utils.arrayToLinkedList(test.input2));
+        const resultList = utils.arrayToLinkedList(test.result);
 
-tests.map(function (test) {
-    var mergedList = mergeTwoSortedLists(utils.arrayToLinkedList(test.input1), utils.arrayToLinkedList(test.input2));
-    //console.log(mergedList.val);//, mergedList.next.val); // mergedList.next.next.val);
-    var resultList = utils.arrayToLinkedList(test.result);
-    //console.log(resultList.val);//, resultList.next.val);
-
-    assert(
-        checkListsEquality(mergedList, resultList),
-        "test failed with input: " + test.input1 + " and " + test.input2
-    );
-    console.log("test PASSED with input: " + test.input1 + " and " + test.input2)
+        assert(
+            checkListsEquality(mergedList, resultList),
+            "with input: [" + test.input1 + "] and [" + test.input2 + "]"
+        );
+    });
 });
-
-console.log("tests finished successfully");
