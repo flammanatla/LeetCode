@@ -1,0 +1,21 @@
+{
+  "name": "leetcode",
+  "version": "1.0.0",
+  "description": "js exercises",
+  "dependencies": {
+    "chalk": "^3.0.0"
+  },
+  "scripts": {
+    "test": "node run-all-test.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flammanatla/LeetCode.git"
+  },
+  "author": "flamma.natla",
+  "license": "private",
+  "bugs": {
+    "url": "https://github.com/flammanatla/LeetCode/issues"
+  },
+  "homepage": "https://github.com/flammanatla/LeetCode#readme"
+}
