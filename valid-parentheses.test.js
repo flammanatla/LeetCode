@@ -1,7 +1,8 @@
-var assert = require("assert");
-var isValid = require("./valid-parentheses");
+const assert = require("assert");
+const isValid = require("./valid-parentheses");
+const utils = require("./utils");
 
-var tests = [
+const tests = [
     { input: "{}}", result: false },
     { input: "{}", result: true }
 ];
